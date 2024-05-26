@@ -2,15 +2,11 @@ package game.gui;
 
 import java.io.IOException;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.PriorityQueue;
-import java.util.ResourceBundle;
 
-import game.engine.*;
-import game.engine.Battle;
 import game.engine.base.Wall;
 import game.engine.exceptions.InsufficientResourcesException;
 import game.engine.exceptions.InvalidLaneException;
@@ -24,24 +20,16 @@ import game.engine.weapons.PiercingCannon;
 import game.engine.weapons.SniperCannon;
 import game.engine.weapons.VolleySpreadCannon;
 import game.engine.weapons.Weapon;
-import game.engine.weapons.WeaponRegistry;
 import javafx.animation.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -60,7 +48,6 @@ import javafx.util.Duration;
 
 import java.util.Random;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 public class NewHardSceneController {
@@ -965,7 +952,22 @@ public class NewHardSceneController {
 
 	
 	public void updateScore(){
-		scoreLabel.setText(this.model.getBattle().getScore() + "");
+		int value = Integer.parseInt(this.scoreLabel.getText());
+		IntegerProperty rescources1 = new SimpleIntegerProperty(value);
+
+		scoreLabel.textProperty().bind(rescources1.asString());
+
+		double finalValueHealth = this.model.getBattle().getScore();
+
+		Duration duration2 = Duration.seconds(1.8);
+
+		KeyValue keyValue2 = new KeyValue(rescources1, finalValueHealth);
+		KeyFrame keyFrame2 = new KeyFrame(duration2, keyValue2);
+
+		Timeline timeline2 = new Timeline(keyFrame2);
+		timeline2.setCycleCount(1); // Play the animation once
+
+		timeline2.play();
 	}
 	
 	@SuppressWarnings("unlikely-arg-type")
