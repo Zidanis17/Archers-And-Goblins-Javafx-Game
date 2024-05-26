@@ -2,12 +2,8 @@ package game.gui;
 
 import java.io.IOException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.PriorityQueue;
+import java.util.*;
 
-import game.engine.base.Wall;
 import game.engine.exceptions.InsufficientResourcesException;
 import game.engine.exceptions.InvalidLaneException;
 import game.engine.lanes.Lane;
@@ -30,8 +26,6 @@ import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -46,24 +40,12 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.util.Random;
-
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 public class NewHardSceneController {
-	private Model model;
+	private final Model model;
 	@FXML
 	private AnchorPane originalPane;
-	@FXML
-	private ProgressBar lane1Bar;
-	@FXML
-	private ProgressBar lane2Bar;
-	@FXML
-	private ProgressBar lane3Bar;
-	@FXML
-	private ProgressBar lane4Bar;
-	@FXML
-	private ProgressBar lane5Bar;
 	@FXML
 	private Label phaseLabel;
 	@FXML
@@ -73,16 +55,6 @@ public class NewHardSceneController {
 	@FXML
 	private Label resourcesLabel;
 	@FXML
-	private Label laneOneDangerLevelLabel;
-	@FXML
-	private Label laneTwoDangerLevelLabel;
-	@FXML
-	private Label laneThreeDangerLevelLabel;
-	@FXML
-	private Label laneFourDangerLevelLabel;
-	@FXML
-	private Label laneFiveDangerLevelLabel;	
-	@FXML
 	private GridPane laneOneGrid;	
 	@FXML
 	private GridPane laneTwoGrid;	
@@ -91,9 +63,7 @@ public class NewHardSceneController {
 	@FXML
 	private GridPane laneFourGrid;	
 	@FXML
-	private GridPane laneFiveGrid;	
-	 @FXML
-	private ChoiceBox<String> laneToBuyWeapon;
+	private GridPane laneFiveGrid;
 	@FXML
 	private Pane lane1;
 	@FXML
@@ -114,9 +84,6 @@ public class NewHardSceneController {
 	private Pane lane4Path;
 	@FXML
 	private Pane lane5Path;
-	
-	@FXML 
-	private Pane weaponShop;
 	 
 	
 	@FXML
@@ -189,10 +156,8 @@ public class NewHardSceneController {
 	private ImageView lane4Wall;
 	@FXML
 	private ImageView lane5Wall;
-	@FXML
-	private Button backButton;
-	
-	@FXML
+
+    @FXML
 	private ImageView purchaseWeaponHovered;
 	
 	@FXML
@@ -225,34 +190,26 @@ public class NewHardSceneController {
 	@FXML
 	private ImageView rescourcesImage;
 	@FXML
-	HashMap<Titan,TranslateTransition> titanHash = new HashMap<Titan,TranslateTransition>();
+	HashMap<Titan,TranslateTransition> titanHash = new HashMap<>();
 	
 	int selectedWeapon = 2;
 	int selectedLane = 1;
 	
-	Image imgPawnRun = new Image(getClass().getResourceAsStream("pawnRedRunningHandsUp.gif"));
-	Image imgPawnHammer =  new Image(getClass().getResourceAsStream("pawnRedRunningHammerDown.gif"));
-	Image imgPawnIdle = new Image(getClass().getResourceAsStream("pawnRedIdle.gif"));
-	Image imgBarrelRedRun = new Image(getClass().getResourceAsStream("barrelRedRunning.gif"));
-	Image imgBarellExplode =  new Image(getClass().getResourceAsStream("barrelRedExploding.gif"));
-	Image imgBarrelRedIdle = new Image(getClass().getResourceAsStream("barrelRedIdle.gif"));
-	Image imgTorchAttack =  new Image(getClass().getResourceAsStream("torchGoblinRedTorchAttackUp.gif"));
-	Image imgTorchRun = new Image(getClass().getResourceAsStream("torchGoblinRedTorchAttackRun.gif"));
-	Image imgTorchIdle =  new Image(getClass().getResourceAsStream("torchGoblinRedTorchGoblinIdle.gif"));
-	Image imgDynamiteAttack =  new Image(getClass().getResourceAsStream("goblinDynamiteRedThrow.gif"));
-	Image imgDynamiteRun = new Image(getClass().getResourceAsStream("goblinDynamiteRedRun.gif"));
-	Image imgDynamiteIdle =  new Image(getClass().getResourceAsStream("goblinDynamiteRedIdle.gif"));
-
-	@FXML
-	private Stage stage;
-	private Scene scene;
-	private Parent root;
-	 
+	Image imgPawnRun = new Image(Objects.requireNonNull(getClass().getResourceAsStream("pawnRedRunningHandsUp.gif")));
+	Image imgPawnHammer =  new Image(Objects.requireNonNull(getClass().getResourceAsStream("pawnRedRunningHammerDown.gif")));
+	Image imgPawnIdle = new Image(Objects.requireNonNull(getClass().getResourceAsStream("pawnRedIdle.gif")));
+	Image imgBarrelRedRun = new Image(Objects.requireNonNull(getClass().getResourceAsStream("barrelRedRunning.gif")));
+	Image imgBarellExplode =  new Image(Objects.requireNonNull(getClass().getResourceAsStream("barrelRedExploding.gif")));
+	Image imgBarrelRedIdle = new Image(Objects.requireNonNull(getClass().getResourceAsStream("barrelRedIdle.gif")));
+	Image imgTorchAttack =  new Image(Objects.requireNonNull(getClass().getResourceAsStream("torchGoblinRedTorchAttackUp.gif")));
+	Image imgTorchRun = new Image(Objects.requireNonNull(getClass().getResourceAsStream("torchGoblinRedTorchAttackRun.gif")));
+	Image imgTorchIdle =  new Image(Objects.requireNonNull(getClass().getResourceAsStream("torchGoblinRedTorchGoblinIdle.gif")));
+	Image imgDynamiteAttack =  new Image(Objects.requireNonNull(getClass().getResourceAsStream("goblinDynamiteRedThrow.gif")));
+	Image imgDynamiteRun = new Image(Objects.requireNonNull(getClass().getResourceAsStream("goblinDynamiteRedRun.gif")));
+	Image imgDynamiteIdle =  new Image(Objects.requireNonNull(getClass().getResourceAsStream("goblinDynamiteRedIdle.gif")));
 
 
-
-
-	public NewHardSceneController() throws IOException {
+    public NewHardSceneController() throws IOException {
 		model = new Model(885 ,5, 125);
 		
 	}
@@ -273,12 +230,8 @@ public class NewHardSceneController {
 		fadeOut.setOnFinished(event -> originalPane.getChildren().remove(bp));
 		fadeOut.play();
 	   }
-	
-	public void passTurn(ActionEvent e) throws InsufficientResourcesException, InvalidLaneException, IOException {
-		gameAction(false, 0, null);
-	}
-	
-	public void gameAction(boolean willBuy, int code, Lane lane ) throws InsufficientResourcesException, InvalidLaneException, IOException {
+
+	public void gameAction(boolean willBuy, int code, Lane lane ) throws InsufficientResourcesException, InvalidLaneException {
 		if(willBuy) {
 			model.getBattle().purchaseWeapon(code, lane);
 		}
@@ -293,7 +246,7 @@ public class NewHardSceneController {
 		
 	}
 	
-	public void showGameOver() throws IOException {
+	public void showGameOver() {
 		
 		lane1.setVisible(false);
 		lane2.setVisible(false);
@@ -311,9 +264,9 @@ public class NewHardSceneController {
 	}
 	
 	public void goToMenu(ActionEvent event) throws IOException {
-		  root = FXMLLoader.load(getClass().getResource("menu.fxml"));
-		  stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		  scene = new Scene(root);
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("menu.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
 		  stage.setScene(scene);
 		  stage.show();
 	}
@@ -325,20 +278,12 @@ public class NewHardSceneController {
 	    Pane[] vCanonLanes = {vCanonLane1, vCanonLane2, vCanonLane3, vCanonLane4, vCanonLane5};
 	    Pane[] trapLanes = {trapLane1, trapLane2, trapLane3, trapLane4, trapLane5};
 
-		 switch (this.selectedWeapon) {
-         case 1:
-             pane = pCanonLanes[laneNum - 1];
-             break;
-         case 2:
-             pane = sCanonLanes[laneNum - 1];
-             break;
-         case 3:
-             pane = vCanonLanes[laneNum - 1];
-             break;
-         default:
-             pane = trapLanes[laneNum - 1];
-             break;
-     }
+        pane = switch (this.selectedWeapon) {
+            case 1 -> pCanonLanes[laneNum - 1];
+            case 2 -> sCanonLanes[laneNum - 1];
+            case 3 -> vCanonLanes[laneNum - 1];
+            default -> trapLanes[laneNum - 1];
+        };
 //		 String textLabel1 = ((Label) pane.getChildren().get(0)).getText();
 //		 ((Label) pane.getChildren().get(0)).setText(Integer.parseInt(textLabel1) + 1 + "");
 		 pane.setVisible(true);
@@ -346,7 +291,7 @@ public class NewHardSceneController {
 		
 	}
 	
-	public void purchaseWeapon( Lane lane, int laneNum) throws InsufficientResourcesException, InvalidLaneException, IOException {
+	public void purchaseWeapon( Lane lane, int laneNum) {
 		try {
 			gameAction(true, this.selectedWeapon, lane);
 			addWeaponToLane(laneNum);
@@ -362,7 +307,7 @@ public class NewHardSceneController {
 		
 	}
 	
-	public void handlePurchaseClick(MouseEvent e) throws InsufficientResourcesException, InvalidLaneException, IOException {
+	public void handlePurchaseClick() {
 		System.out.println(this.selectedLane);
 		int laneNum = this.selectedLane;
 		Lane lane = model.getLaneByNumber(laneNum);
@@ -410,7 +355,7 @@ public class NewHardSceneController {
 	
 	
 	public void changeLaneWallImageDefeated(int i) {
-		  Image img = new Image(getClass().getResourceAsStream("wallBroken.png"));
+		  Image img = new Image(Objects.requireNonNull(getClass().getResourceAsStream("wallBroken.png")));
 		  ImageView[] allWallsImages = {lane1Wall, lane2Wall,lane3Wall,lane4Wall,lane5Wall};
 		  Pane[] pCanonLanes = {pCanonLane1, pCanonLane2, pCanonLane3, pCanonLane4, pCanonLane5};
 		    Pane[] sCanonLanes = {sCanonLane1, sCanonLane2, sCanonLane3, sCanonLane4, sCanonLane5};
@@ -430,23 +375,7 @@ public class NewHardSceneController {
 		  trapLanes[i - 1].setVisible(false);
 		  
 	}
-	
-	public void updateProgressBars() {
-		updateLaneProgressBarByNumber(1);
-		updateLaneProgressBarByNumber(2);
-		updateLaneProgressBarByNumber(3);
-		updateLaneProgressBarByNumber(4);
-		updateLaneProgressBarByNumber(5);
-	}
-	
-	public void updateDangerLevels() {
-		updateLaneDangerLevelByNumber(1);
-		updateLaneDangerLevelByNumber(2);
-		updateLaneDangerLevelByNumber(3);
-		updateLaneDangerLevelByNumber(4);
-		updateLaneDangerLevelByNumber(5);
-	}
-	
+
 	public void updateTitanGrids() {
 //		updateLaneTitanGridByNumber(1);
 //		updateLaneTitanGridByNumber(2);
@@ -459,22 +388,6 @@ public class NewHardSceneController {
 		updateLaneTitanPaneByNumber(3);
 		updateLaneTitanPaneByNumber(4);
 		updateLaneTitanPaneByNumber(5);
-	}
-	public void updateLaneProgressBarByNumber(int num) {
-		ProgressBar[] allLanesBars = {lane1Bar, lane2Bar, lane3Bar, lane4Bar, lane5Bar};
-		Wall wall = model.getLaneByNumber(num).getLaneWall();
-		ProgressBar currProgBar = allLanesBars[num - 1];
-		double newProgress = (double) wall.getCurrentHealth() / (double) wall.getBaseHealth();
-		
-		if(currProgBar.getProgress() != newProgress) {
-			PauseTransition pause = new PauseTransition(Duration.millis(500));
-			pause.setOnFinished(event ->{
-				currProgBar.setStyle(null);
-			});
-			pause.play();
-			currProgBar.setStyle("-fx-accent: #FF0000");
-		}
-		currProgBar.setProgress(newProgress);
 	}
 	
 	
@@ -663,8 +576,7 @@ public class NewHardSceneController {
 	
 	public void updateLaneTitanPaneByNumber(int num) {
 		Pane[] allLanesBars = {lane1Path, lane2Path, lane3Path, lane4Path, lane5Path};
-		ArrayList<ArrayList<Titan>> titansInLaneForm = model.getTitansInLaneFormByNumber(num);
-		PriorityQueue<Titan> titans = model.getLaneByNumber(num).getTitans();
+        PriorityQueue<Titan> titans = model.getLaneByNumber(num).getTitans();
 		Pane selectedPane = allLanesBars[num - 1];
 		Random random = new Random();
 		
@@ -673,19 +585,18 @@ public class NewHardSceneController {
 		
 		 for(Titan t :titans) {
 			 Pane titansInGridBox = new Pane();
-			 Titan currTitan = t;
-			 Label tempLabel = new Label();
+             Label tempLabel = new Label();
 			 ImageView imgView = new ImageView();
 			
 				
 			 tempLabel.setPrefWidth(200);
 				
-			 Label hpLabel = new Label("HP: "+currTitan.getCurrentHealth());
+			 Label hpLabel = new Label("HP: "+ t.getCurrentHealth());
              hpLabel.setStyle("-fx-background-color: white; -fx-padding: 5px;");
 //             hpLabel.setVisible(false);
 
              ProgressBar bar = new ProgressBar();
-             bar.setProgress((double)(currTitan.getCurrentHealth())/(double)(currTitan.getBaseHealth()));
+             bar.setProgress((double)(t.getCurrentHealth())/(double)(t.getBaseHealth()));
 //             bar.setVisible(false);
              
 //             titansInGridBox.setOnMouseEntered(event -> {
@@ -702,100 +613,105 @@ public class NewHardSceneController {
 
             
 			 imgView.setPreserveRatio(true);
-			 if(this.titanHash.get(currTitan) == null) {
-				if(currTitan instanceof PureTitan) {
-					int fitWidth = 191;
-					int fitHeight = 190;
-					Image img;
-					img = this.imgPawnIdle;
-					
-					imgView.setImage(img);
-					imgView.setFitWidth(fitWidth);
-					imgView.setFitHeight(fitHeight);
-					titansInGridBox.getChildren().add(imgView);
-					selectedPane.getChildren().add(titansInGridBox);
-					titansInGridBox.setLayoutY(760);
-					hpLabel.setLayoutY(imgView.getLayoutY()+20);
-		            bar.setLayoutY(imgView.getLayoutY()+40);
-		            hpLabel.setLayoutX(imgView.getLayoutX()+40);
-		            bar.setLayoutX(imgView.getLayoutX()+40);
-		            
-		            titansInGridBox.getChildren().addAll(hpLabel,bar);
-				}else if(currTitan instanceof ArmoredTitan) {
-					int fitWidth = 135;
-					int fitHeight = 135;
+			 if(this.titanHash.get(t) == null) {
+                 switch (t) {
+                     case PureTitan ignored -> {
+                         int fitWidth = 191;
+                         int fitHeight = 190;
+                         Image img;
+                         img = this.imgPawnIdle;
 
-					Image img;
-					img = this.imgBarrelRedIdle;
-					
-					
-					imgView.setImage(img);
-					imgView.setFitWidth(fitWidth);
-					imgView.setFitHeight(fitHeight);
-					titansInGridBox.getChildren().add(imgView);
-					selectedPane.getChildren().add(titansInGridBox);
-					titansInGridBox.setLayoutY(760);
-					hpLabel.setLayoutY(imgView.getLayoutY()-10);
-		            bar.setLayoutY(imgView.getLayoutY()+10);
-		            hpLabel.setLayoutX(imgView.getLayoutX()+20);
-		            bar.setLayoutX(imgView.getLayoutX()+20);
-		            titansInGridBox.getChildren().addAll(hpLabel,bar);
-				}else if(currTitan instanceof AbnormalTitan) {
-					int fitWidth = 143;
-					int fitHeight = 150;
-					Image img;
-					img = this.imgDynamiteIdle;
-					
-					
-					imgView.setImage(img);
-					imgView.setFitWidth(fitWidth);
-					imgView.setFitHeight(fitHeight);
-					titansInGridBox.getChildren().add(imgView);
-					selectedPane.getChildren().add(titansInGridBox);
-					titansInGridBox.setLayoutY(760);
-					hpLabel.setLayoutY(imgView.getLayoutY());
-		            bar.setLayoutY(imgView.getLayoutY()+20);
-		            hpLabel.setLayoutX(imgView.getLayoutX()+20);
-		            bar.setLayoutX(imgView.getLayoutX()+20);
-		            titansInGridBox.getChildren().addAll(hpLabel,bar);
+                         imgView.setImage(img);
+                         imgView.setFitWidth(fitWidth);
+                         imgView.setFitHeight(fitHeight);
+                         titansInGridBox.getChildren().add(imgView);
+                         selectedPane.getChildren().add(titansInGridBox);
+                         titansInGridBox.setLayoutY(760);
+                         hpLabel.setLayoutY(imgView.getLayoutY() + 20);
+                         bar.setLayoutY(imgView.getLayoutY() + 40);
+                         hpLabel.setLayoutX(imgView.getLayoutX() + 40);
+                         bar.setLayoutX(imgView.getLayoutX() + 40);
 
-				}else {
-					int fitWidth = 261;
-					int fitHeight = 239;
-					Image img;
-					img = this.imgTorchIdle;
-					
-					imgView.setImage(img);
-					imgView.setFitWidth(fitWidth);
-					imgView.setFitHeight(fitHeight);
-					titansInGridBox.getChildren().add(imgView);
-					selectedPane.getChildren().add(titansInGridBox);
-					titansInGridBox.setLayoutY(760);
-					hpLabel.setLayoutY(imgView.getLayoutY() + 30);
-					bar.setLayoutY(imgView.getLayoutY() + 50);
-					hpLabel.setLayoutX(imgView.getLayoutX() + 80);
-					bar.setLayoutX(imgView.getLayoutX() + 80);
-					
-					
-		            titansInGridBox.getChildren().addAll(hpLabel,bar);
-				}
+                         titansInGridBox.getChildren().addAll(hpLabel, bar);
+                     }
+                     case ArmoredTitan ignored -> {
+                         int fitWidth = 135;
+                         int fitHeight = 135;
+
+                         Image img;
+                         img = this.imgBarrelRedIdle;
+
+
+                         imgView.setImage(img);
+                         imgView.setFitWidth(fitWidth);
+                         imgView.setFitHeight(fitHeight);
+                         titansInGridBox.getChildren().add(imgView);
+                         selectedPane.getChildren().add(titansInGridBox);
+                         titansInGridBox.setLayoutY(760);
+                         hpLabel.setLayoutY(imgView.getLayoutY() - 10);
+                         bar.setLayoutY(imgView.getLayoutY() + 10);
+                         hpLabel.setLayoutX(imgView.getLayoutX() + 20);
+                         bar.setLayoutX(imgView.getLayoutX() + 20);
+                         titansInGridBox.getChildren().addAll(hpLabel, bar);
+                     }
+                     case AbnormalTitan ignored -> {
+                         int fitWidth = 143;
+                         int fitHeight = 150;
+                         Image img;
+                         img = this.imgDynamiteIdle;
+
+
+                         imgView.setImage(img);
+                         imgView.setFitWidth(fitWidth);
+                         imgView.setFitHeight(fitHeight);
+                         titansInGridBox.getChildren().add(imgView);
+                         selectedPane.getChildren().add(titansInGridBox);
+                         titansInGridBox.setLayoutY(760);
+                         hpLabel.setLayoutY(imgView.getLayoutY());
+                         bar.setLayoutY(imgView.getLayoutY() + 20);
+                         hpLabel.setLayoutX(imgView.getLayoutX() + 20);
+                         bar.setLayoutX(imgView.getLayoutX() + 20);
+                         titansInGridBox.getChildren().addAll(hpLabel, bar);
+
+                     }
+                     default -> {
+                         int fitWidth = 261;
+                         int fitHeight = 239;
+                         Image img;
+                         img = this.imgTorchIdle;
+
+                         imgView.setImage(img);
+                         imgView.setFitWidth(fitWidth);
+                         imgView.setFitHeight(fitHeight);
+                         titansInGridBox.getChildren().add(imgView);
+                         selectedPane.getChildren().add(titansInGridBox);
+                         titansInGridBox.setLayoutY(760);
+                         hpLabel.setLayoutY(imgView.getLayoutY() + 30);
+                         bar.setLayoutY(imgView.getLayoutY() + 50);
+                         hpLabel.setLayoutX(imgView.getLayoutX() + 80);
+                         bar.setLayoutX(imgView.getLayoutX() + 80);
+
+
+                         titansInGridBox.getChildren().addAll(hpLabel, bar);
+                     }
+                 }
 				
 				int randomNumber = random.nextInt((76 - (-71)) + 1) + (-71);
 				titansInGridBox.setLayoutX(randomNumber);
 				 TranslateTransition translateTransition = new TranslateTransition();
 			       translateTransition.setDuration(Duration.seconds(1.8)); // Set duration of 2 seconds
 			       translateTransition.setNode(titansInGridBox); // Set the node to be animated
-			       translateTransition.setByY(-currTitan.getSpeed());
+			       translateTransition.setByY(-t.getSpeed());
 			        
-			        this.titanHash.put(currTitan, translateTransition);
+			        this.titanHash.put(t, translateTransition);
 			 }else {
-				TranslateTransition trans = this.titanHash.get(currTitan);
+				TranslateTransition trans = this.titanHash.get(t);
 
-				 if(!currTitan.hasReachedTarget() && !currTitan.isDefeated()) {
+				 if(!t.hasReachedTarget() && !t.isDefeated()) {
 
 
-				 	if(currTitan instanceof ColossalTitan) {
-					 	trans.setByY(-currTitan.getSpeed());
+				 	if(t instanceof ColossalTitan) {
+					 	trans.setByY(-t.getSpeed());
 				 	}
 
 				 	
@@ -803,34 +719,28 @@ public class NewHardSceneController {
 					this.playButtonPane.setDisable(true);
 					
 					Pane titanPaneRun = (Pane) trans.getNode();
-					ImageView titanImageIdle = (ImageView) titanPaneRun.getChildren().get(0);
-					if(currTitan instanceof PureTitan) {
-						titanImageIdle.setImage(this.imgPawnRun);
-					}else if(currTitan instanceof AbnormalTitan) {
-						titanImageIdle.setImage(this.imgDynamiteRun);
-					}else if(currTitan instanceof ArmoredTitan) {
-						titanImageIdle.setImage(this.imgBarrelRedRun);
-					}else {
-						titanImageIdle.setImage(this.imgTorchRun);
-					}
+					ImageView titanImageIdle = (ImageView) titanPaneRun.getChildren().getFirst();
+                     switch (t) {
+                         case PureTitan ignored -> titanImageIdle.setImage(this.imgPawnRun);
+                         case AbnormalTitan ignored -> titanImageIdle.setImage(this.imgDynamiteRun);
+                         case ArmoredTitan ignored -> titanImageIdle.setImage(this.imgBarrelRedRun);
+                         default -> titanImageIdle.setImage(this.imgTorchRun);
+                     }
 
 				 	trans.play();
-					updateHealth(trans, currTitan);
+					updateHealth(trans, t);
 				 	trans.setOnFinished((event) ->{
 				 		this.playButtonPane.setDisable(false);
 				 		this.purchaseButton.setDisable(false);
 				 		
 				 		Pane titanPane = (Pane) trans.getNode();
-						 ImageView titanImage = (ImageView) titanPane.getChildren().get(0);
-						 if(currTitan instanceof PureTitan) {
-							 titanImage.setImage(this.imgPawnIdle);
-						 }else if(currTitan instanceof AbnormalTitan) {
-							 titanImage.setImage(this.imgDynamiteIdle);
-						 }else if(currTitan instanceof ArmoredTitan) {
-							 titanImage.setImage(this.imgBarrelRedIdle);
-						 }else {
-							 titanImage.setImage(this.imgTorchIdle);
-						 }
+						 ImageView titanImage = (ImageView) titanPane.getChildren().getFirst();
+                        switch (t) {
+                            case PureTitan ignored -> titanImage.setImage(this.imgPawnIdle);
+                            case AbnormalTitan ignored -> titanImage.setImage(this.imgDynamiteIdle);
+                            case ArmoredTitan ignored -> titanImage.setImage(this.imgBarrelRedIdle);
+                            default -> titanImage.setImage(this.imgTorchIdle);
+                        }
 						 
 				 	});
 				 		
@@ -838,19 +748,16 @@ public class NewHardSceneController {
 
 				 
 				 } 
-				 if(currTitan.hasReachedTarget() && !currTitan.isDefeated()){
+				 if(t.hasReachedTarget() && !t.isDefeated()){
 					 Pane titanPane = (Pane) trans.getNode();
-					 ImageView titanImage = (ImageView) titanPane.getChildren().get(0);
-					 if(currTitan instanceof PureTitan) {
-						 titanImage.setImage(imgPawnHammer);
-					 }else if(currTitan instanceof AbnormalTitan) {
-						 titanImage.setImage(imgDynamiteAttack);
-					 }else if(currTitan instanceof ArmoredTitan) {
-						 titanImage.setImage(this.imgBarellExplode);
-					 }else {
-						 titanImage.setImage(this.imgTorchAttack);
-					 }
-					 updateHealth(trans, currTitan);
+					 ImageView titanImage = (ImageView) titanPane.getChildren().getFirst();
+                     switch (t) {
+                         case PureTitan ignored -> titanImage.setImage(imgPawnHammer);
+                         case AbnormalTitan ignored -> titanImage.setImage(imgDynamiteAttack);
+                         case ArmoredTitan ignored -> titanImage.setImage(this.imgBarellExplode);
+                         default -> titanImage.setImage(this.imgTorchAttack);
+                     }
+					 updateHealth(trans, t);
 					 
 				 }
 			 }
@@ -864,8 +771,8 @@ public class NewHardSceneController {
 				 TranslateTransition trans2 = this.titanHash.get(t);
 				 
 				 Pane titanPane = (Pane) trans2.getNode();
-				 if(titanPane.getChildren().size()> 0) {
-					 ImageView titanImage = (ImageView) titanPane.getChildren().get(0);
+				 if(!titanPane.getChildren().isEmpty()) {
+					 ImageView titanImage = (ImageView) titanPane.getChildren().getFirst();
 				 
 					 updateHealth(trans2, t);
 				 	trans2.setByY(0);
@@ -873,23 +780,23 @@ public class NewHardSceneController {
 				 	trans2.play();
 				 	Image imgDead;
 				 	if(t instanceof ArmoredTitan) {
-					 	imgDead =  new Image(getClass().getResourceAsStream("Explosion.gif"));
+					 	imgDead =  new Image(Objects.requireNonNull(getClass().getResourceAsStream("Explosion.gif")));
 					 	titanImage.setImage(imgDead);
 					 	titanImage.setFitWidth(600);
 					 	titanImage.setScaleY(2);
 					 	titanImage.setScaleX(2);
 
 				 	}else {
-				 		imgDead =  new Image(getClass().getResourceAsStream("Dead.gif"));
+				 		imgDead =  new Image(Objects.requireNonNull(getClass().getResourceAsStream("Dead.gif")));
 				 		titanImage.setImage(imgDead);
 					 	titanImage.setFitWidth(125);
 				 	}
 				 	titanImage.setPreserveRatio(true);
-				 	Image rescources = new Image(getClass().getResourceAsStream("Resources.gif"));
+				 	Image rescources = new Image(Objects.requireNonNull(getClass().getResourceAsStream("Resources.gif")));
 					rescourcesImage.setImage(rescources);
 				 	trans2.setOnFinished(event ->{
 				 		((Pane)this.titanHash.get(t).getNode()).getChildren().clear();
-				 		Image rescources2 = new Image(getClass().getResourceAsStream("G_Idle_(NoShadow).png"));
+				 		Image rescources2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("G_Idle_(NoShadow).png")));
 						rescourcesImage.setImage(rescources2);
 				 	});
 				 }
@@ -939,12 +846,7 @@ public class NewHardSceneController {
 		timeline2.play();
 
 	}
-	
-	public void updateLaneDangerLevelByNumber(int num) {
-		Label[] allLanesDLBars = {laneOneDangerLevelLabel, laneTwoDangerLevelLabel, laneThreeDangerLevelLabel, laneFourDangerLevelLabel, laneFiveDangerLevelLabel};
-		int dangerLevel = model.getLaneByNumber(num).getDangerLevel();
-		allLanesDLBars[num - 1].setText(dangerLevel +"");;
-	}
+
 	
 //	public void updateTitansOnGridByNumber(int num) {
 //		laneOneGrid.add(lane1Bar, 1, num);
@@ -1021,12 +923,12 @@ public class NewHardSceneController {
 
 		timeline2.play();
 	}
-	public void updateWeaponSelected(MouseEvent event) {
+	@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+    public void updateWeaponSelected(MouseEvent event) {
 		Pane[] initialweaponsPanesArray = {weaponOne,weaponTwo,weaponThree,weaponFour};
 		ArrayList<Pane> weaponsPanes = new ArrayList<>(Arrays.asList(initialweaponsPanesArray));
 		ImageView[] initialweaponsImagesArray = {weaponOneSelectedImage,weaponTwoSelectedImage,weaponThreeSelectedImage,weaponFourSelectedImage};
-		ArrayList<ImageView> weaponsImages = new ArrayList<>(Arrays.asList(initialweaponsImagesArray));
-		Pane weaponSelectedPane = (Pane)event.getSource();
+        Pane weaponSelectedPane = (Pane)event.getSource();
 		int newSelectedWeapon = weaponsPanes.indexOf(weaponSelectedPane);
 		this.selectedWeapon = newSelectedWeapon + 1;
 		updateSelectedVisibility(initialweaponsImagesArray[newSelectedWeapon]);
@@ -1035,9 +937,9 @@ public class NewHardSceneController {
 	
 	public void updateSelectedVisibility(ImageView IV) {
 		ImageView[] initialweaponsImagesArray = {weaponOneSelectedImage,weaponTwoSelectedImage,weaponThreeSelectedImage,weaponFourSelectedImage};
-		for(int i = 0; i < initialweaponsImagesArray.length; i++) {
-			initialweaponsImagesArray[i].setVisible(false);
-		}
+        for (ImageView imageView : initialweaponsImagesArray) {
+            imageView.setVisible(false);
+        }
 		
 		IV.setVisible(true);
 		
@@ -1084,35 +986,35 @@ public class NewHardSceneController {
 		}
 		
 		if(selectedLane == 1) {
-			Image img = new Image(getClass().getResourceAsStream("numberOneImage.png"));
+			Image img = new Image(Objects.requireNonNull(getClass().getResourceAsStream("numberOneImage.png")));
 			laneNumberImageView.setImage(img);
 			laneNumberImageView.setFitWidth(54);
 			laneNumberImageView.setFitWidth(54);
 			laneNumberImageView.setLayoutX(6);
 			laneNumberImageView.setLayoutY(5);
 		}if(selectedLane == 2) {
-			Image img = new Image(getClass().getResourceAsStream("numberTwoImage.png"));
+			Image img = new Image(Objects.requireNonNull(getClass().getResourceAsStream("numberTwoImage.png")));
 			laneNumberImageView.setImage(img);
 			laneNumberImageView.setFitWidth(54);
 			laneNumberImageView.setFitWidth(54);
 			laneNumberImageView.setLayoutX(6);
 			laneNumberImageView.setLayoutY(5);
 		}if(selectedLane == 3) {
-			Image img = new Image(getClass().getResourceAsStream("numberThreeImage.png"));
+			Image img = new Image(Objects.requireNonNull(getClass().getResourceAsStream("numberThreeImage.png")));
 			laneNumberImageView.setImage(img);
 			laneNumberImageView.setFitWidth(54);
 			laneNumberImageView.setFitWidth(54);
 			laneNumberImageView.setLayoutX(6);
 			laneNumberImageView.setLayoutY(5);
 		}if(selectedLane == 4) {
-			Image img = new Image(getClass().getResourceAsStream("numberFourImage.png"));
+			Image img = new Image(Objects.requireNonNull(getClass().getResourceAsStream("numberFourImage.png")));
 			laneNumberImageView.setImage(img);
 			laneNumberImageView.setFitWidth(41);
 			laneNumberImageView.setFitWidth(36);
 			laneNumberImageView.setLayoutX(13);
 			laneNumberImageView.setLayoutY(9);
 		}if(selectedLane == 5) {
-			Image img = new Image(getClass().getResourceAsStream("number5Image.png"));
+			Image img = new Image(Objects.requireNonNull(getClass().getResourceAsStream("number5Image.png")));
 			laneNumberImageView.setImage(img);
 			laneNumberImageView.setFitWidth(41);
 			laneNumberImageView.setFitWidth(36);
@@ -1130,15 +1032,12 @@ public class NewHardSceneController {
 		int numCurrentLaneWallTraps = 0;
 		Lane currentLane = model.getLaneByNumber(selectedLane);
 		for(Weapon weapon : currentLane.getWeapons()) {
-			if(weapon instanceof SniperCannon) {
-				numCurrentLaneSCanons++;
-			}else if(weapon instanceof PiercingCannon) {
-				numCurrentLanePCanons++;
-			}else if(weapon instanceof VolleySpreadCannon) {
-				numCurrentLaneVCanons++;
-			}else {
-				numCurrentLaneWallTraps++;
-			}
+            switch (weapon) {
+                case SniperCannon ignored -> numCurrentLaneSCanons++;
+                case PiercingCannon ignored -> numCurrentLanePCanons++;
+                case VolleySpreadCannon ignored -> numCurrentLaneVCanons++;
+                case null, default -> numCurrentLaneWallTraps++;
+            }
 		}
 		double wallHealth = (double) currentLane.getLaneWall().getCurrentHealth()/(double)currentLane.getLaneWall().getBaseHealth();
 		currentLaneHealthBar.setProgress(wallHealth);
@@ -1148,10 +1047,10 @@ public class NewHardSceneController {
 			currentLaneHealthBar.setStyle("-fx-accent: #088cbc");
 		}
 		currentLaneDangerLevel.setText(currentLane.getDangerLevel()+"");
-		currentLaneWallTraps.setText("x" +numCurrentLaneWallTraps + "");
-		currentLanePCanons.setText("x" + numCurrentLanePCanons+"");
-		currentLaneVCanons.setText("x" +numCurrentLaneVCanons+"");
-		currentLaneSCanons.setText("x" +numCurrentLaneSCanons+"");
+		currentLaneWallTraps.setText("x" +numCurrentLaneWallTraps);
+		currentLanePCanons.setText("x" + numCurrentLanePCanons);
+		currentLaneVCanons.setText("x" +numCurrentLaneVCanons);
+		currentLaneSCanons.setText("x" +numCurrentLaneSCanons);
 		
 	}
 	
@@ -1162,7 +1061,7 @@ public class NewHardSceneController {
 	public void updatePlayButtonHoverOff() {
 		playButtonHover.setVisible(false);
 	}
-	public void passTurnButtonClicked() throws IOException {
+	public void passTurnButtonClicked() {
 		model.getBattle().passTurn();
 		this.updateSceneValues();
 		boolean isGameOver = model.getBattle().isGameOver();
@@ -1172,10 +1071,10 @@ public class NewHardSceneController {
 	}
 	
 	public void initialize() {
-		Image image = new Image(getClass().getResourceAsStream("01.png"));
+		Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("01.png")));
 		ImageCursor cursor = new ImageCursor(image,image.getWidth() / 2,image.getHeight() /2);
 		
-		cursor.getBestSize(32, 32);
+		ImageCursor.getBestSize(32, 32);
 		
 		originalPane.setCursor(cursor);
 		updateSceneValues();
