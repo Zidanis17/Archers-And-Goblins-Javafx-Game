@@ -1,0 +1,43 @@
+
+#startLabel:hover {
+	-fx-text-fill: red;
+}
+
+
+
+#backButton {
+	-fx-background-color: orange;
+ 
+ 
+    -fx-border-radius: 15px;  
+	
+}
+
+
+#backButton:hover {
+
+	-fx-background-color: white;
+
+}
+
+#instructionButton:hover {
+	-fx-text-fill: black;
+	-fx-background-color: white;
+	
+}
+.text-area {
+    -fx-background-color: black; 
+    -fx-text-fill: green; 
+}
+
+.text-area .scroll-pane .scroll-bar:vertical {
+    -fx-padding: 0 0 0 0; 
+}
+
+.text-area .scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: green; 
+}
+
+.text-area .scroll-pane .scroll-bar:vertical .track {
+    -fx-background-color: white; 
+}

@@ -1,0 +1,798 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.effect.SepiaTone?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="originalPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.gui.HardSceneController">
+   <children>
+      <Pane fx:id="phasePane" layoutX="249.0" layoutY="36.0" prefHeight="59.0" prefWidth="307.0">
+         <children>
+            <Label fx:id="staticPhaseLabel" layoutX="25.0" layoutY="2.0" text="PHASE:">
+               <font>
+                  <Font name="Ditty" size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="phaseLabel" layoutX="129.0" layoutY="2.0" prefHeight="56.0" prefWidth="173.0" text="EARLY" textFill="GREEN">
+               <font>
+                  <Font name="Ditty" size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="scorePane" layoutX="709.0" layoutY="37.0" prefHeight="59.0" prefWidth="274.0">
+         <children>
+            <Label fx:id="staticScoreLabel" layoutX="26.0" layoutY="2.0" text="SCORE:">
+               <font>
+                  <Font name="Ditty" size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="scoreLabel" layoutX="130.0" layoutY="-6.0" prefHeight="64.0" prefWidth="162.0" text="0">
+               <font>
+                  <Font name="Linotext" size="48.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="turnPane" layoutX="1102.0" layoutY="36.0" prefHeight="59.0" prefWidth="211.0">
+         <children>
+            <Label fx:id="staticTurnText" layoutX="25.0" layoutY="2.0" text="TURN:">
+               <font>
+                  <Font name="Ditty" size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="turnLabel" layoutX="116.0" layoutY="-6.0" prefHeight="64.0" prefWidth="89.0" text="0">
+               <font>
+                  <Font name="Linotext" size="48.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="lane5" layoutX="38.0" layoutY="825.0" prefHeight="176.0" prefWidth="1344.0">
+         <children>
+            <Pane fx:id="phasePane11" layoutY="41.0" prefHeight="59.0" prefWidth="173.0">
+               <children>
+                  <Label fx:id="staticDangerLabel5" layoutY="2.0" text="LEVEL:">
+                     <font>
+                        <Font name="Ditty" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="laneFiveDangerLevelLabel" layoutX="89.0" layoutY="-2.0" prefHeight="64.0" prefWidth="80.0" text="0">
+                     <font>
+                        <Font name="Linotext" size="48.0" />
+                     </font>
+                  </Label>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </Pane>
+            <Rectangle fx:id="laneFiveWall" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="165.0" layoutX="212.0" layoutY="4.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <GridPane fx:id="laneFiveGrid" layoutX="296.0" layoutY="4.0" prefHeight="165.0" prefWidth="1044.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="801.0" minWidth="10.0" prefWidth="523.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="801.0" minWidth="10.0" prefWidth="523.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="0.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <ProgressBar fx:id="lane5Bar" layoutY="23.0" prefWidth="200.0" progress="1.0" />
+            <Pane fx:id="sCanonLane5" layoutX="203.0" layoutY="29.0" prefHeight="56.0" prefWidth="79.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="-1.0" layoutY="-2.0" prefHeight="25.0" prefWidth="79.0" text="0" />
+                  <ImageView fitHeight="41.0" fitWidth="79.0" layoutX="19.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" rotate="5.7">
+                     <image>
+                        <Image url="@Better%20sniper%20rifle.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="vCanonLane5" layoutX="203.0" layoutY="100.0" prefHeight="56.0" prefWidth="79.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="-1.0" layoutY="-2.0" prefHeight="25.0" prefWidth="79.0" text="0" />
+                  <ImageView fitHeight="41.0" fitWidth="79.0" layoutX="11.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" rotate="-15.9">
+                     <image>
+                        <Image url="@cannon.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="pCanonLane5" layoutX="111.0" layoutY="43.0" prefHeight="88.0" prefWidth="101.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="18.0" layoutY="6.0" prefHeight="12.0" prefWidth="65.0" text="0" />
+                  <ImageView fx:id="weaponOneImage14" fitHeight="84.0" fitWidth="80.0" layoutX="11.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@pngtree-cannon-icon-in-flat-circle-isolated-on-white-background-vector-illustration-png-image_4981592.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="trapLane5" layoutX="131.0" layoutY="111.0" prefHeight="55.0" prefWidth="80.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="-1.0" layoutY="-2.0" prefHeight="25.0" prefWidth="79.0" text="0" />
+                  <ImageView fitHeight="41.0" fitWidth="60.0" layoutX="22.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" rotate="5.7">
+                     <image>
+                        <Image url="@log-transparent-1154698042188fzl0gy91.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane fx:id="lane4" layoutX="37.0" layoutY="641.0" prefHeight="176.0" prefWidth="1344.0">
+         <children>
+            <Pane fx:id="phasePane12" layoutY="48.0" prefHeight="59.0" prefWidth="162.0">
+               <children>
+                  <Label fx:id="staticDangerLabel4" layoutY="2.0" text="LEVEL:">
+                     <font>
+                        <Font name="Ditty" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="laneFourDangerLevelLabel" layoutX="90.0" layoutY="-2.0" prefHeight="64.0" prefWidth="72.0" text="0">
+                     <font>
+                        <Font name="Linotext" size="48.0" />
+                     </font>
+                  </Label>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </Pane>
+            <Rectangle fx:id="laneFourWall" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="165.0" layoutX="212.0" layoutY="4.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <GridPane fx:id="laneFourGrid" layoutX="296.0" layoutY="4.0" prefHeight="165.0" prefWidth="1044.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="801.0" minWidth="10.0" prefWidth="523.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="801.0" minWidth="10.0" prefWidth="523.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="0.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <ProgressBar fx:id="lane4Bar" layoutX="-7.0" layoutY="30.0" prefWidth="200.0" progress="1.0" />
+            <Pane fx:id="sCanonLane4" layoutX="203.0" layoutY="31.0" prefHeight="56.0" prefWidth="79.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="-1.0" layoutY="-2.0" prefHeight="25.0" prefWidth="79.0" text="0" />
+                  <ImageView fitHeight="41.0" fitWidth="79.0" layoutX="19.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" rotate="5.7">
+                     <image>
+                        <Image url="@Better%20sniper%20rifle.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="vCanonLane4" layoutX="203.0" layoutY="97.0" prefHeight="56.0" prefWidth="79.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="-1.0" layoutY="-2.0" prefHeight="25.0" prefWidth="79.0" text="0" />
+                  <ImageView fitHeight="41.0" fitWidth="79.0" layoutX="11.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" rotate="-15.9">
+                     <image>
+                        <Image url="@cannon.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="pCanonLane4" layoutX="112.0" layoutY="44.0" prefHeight="88.0" prefWidth="101.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="18.0" layoutY="6.0" prefHeight="12.0" prefWidth="65.0" text="0" />
+                  <ImageView fx:id="weaponOneImage13" fitHeight="84.0" fitWidth="80.0" layoutX="11.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@pngtree-cannon-icon-in-flat-circle-isolated-on-white-background-vector-illustration-png-image_4981592.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="trapLane4" layoutX="114.0" layoutY="120.0" prefHeight="55.0" prefWidth="80.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="-1.0" layoutY="-2.0" prefHeight="25.0" prefWidth="79.0" text="0" />
+                  <ImageView fitHeight="41.0" fitWidth="60.0" layoutX="22.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" rotate="5.7">
+                     <image>
+                        <Image url="@log-transparent-1154698042188fzl0gy91.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane fx:id="lane3" layoutX="37.0" layoutY="465.0" prefHeight="176.0" prefWidth="1344.0">
+         <children>
+            <Pane fx:id="phasePane13" layoutY="44.0" prefHeight="59.0" prefWidth="162.0">
+               <children>
+                  <Label fx:id="staticDangerLabel3" layoutY="2.0" text="LEVEL:">
+                     <font>
+                        <Font name="Ditty" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="laneThreeDangerLevelLabel" layoutX="89.0" layoutY="-2.0" prefHeight="64.0" prefWidth="72.0" text="0">
+                     <font>
+                        <Font name="Linotext" size="48.0" />
+                     </font>
+                  </Label>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </Pane>
+            <Rectangle fx:id="laneThreeWall" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="165.0" layoutX="212.0" layoutY="4.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <GridPane fx:id="laneThreeGrid" layoutX="296.0" layoutY="4.0" prefHeight="165.0" prefWidth="1044.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="801.0" minWidth="10.0" prefWidth="523.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="801.0" minWidth="10.0" prefWidth="523.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="0.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <ProgressBar fx:id="lane3Bar" layoutY="26.0" prefWidth="200.0" progress="1.0" />
+            <Pane fx:id="sCanonLane3" layoutX="203.0" layoutY="31.0" prefHeight="56.0" prefWidth="79.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="-1.0" layoutY="-2.0" prefHeight="25.0" prefWidth="79.0" text="0" />
+                  <ImageView fitHeight="41.0" fitWidth="79.0" layoutX="19.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" rotate="5.7">
+                     <image>
+                        <Image url="@Better%20sniper%20rifle.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="vCanonLane3" layoutX="203.0" layoutY="100.0" prefHeight="56.0" prefWidth="79.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="-1.0" layoutY="-2.0" prefHeight="25.0" prefWidth="79.0" text="0" />
+                  <ImageView fitHeight="41.0" fitWidth="79.0" layoutX="11.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" rotate="-15.9">
+                     <image>
+                        <Image url="@cannon.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="pCanonLane3" layoutX="112.0" layoutY="43.0" prefHeight="88.0" prefWidth="101.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="18.0" layoutY="6.0" prefHeight="12.0" prefWidth="65.0" text="0" />
+                  <ImageView fx:id="weaponOneImage12" fitHeight="84.0" fitWidth="80.0" layoutX="11.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@pngtree-cannon-icon-in-flat-circle-isolated-on-white-background-vector-illustration-png-image_4981592.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="trapLane3" layoutX="112.0" layoutY="114.0" prefHeight="55.0" prefWidth="80.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="-1.0" layoutY="-2.0" prefHeight="25.0" prefWidth="79.0" text="0" />
+                  <ImageView fitHeight="41.0" fitWidth="60.0" layoutX="22.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" rotate="5.7">
+                     <image>
+                        <Image url="@log-transparent-1154698042188fzl0gy91.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane fx:id="lane2" layoutX="38.0" layoutY="289.0" prefHeight="176.0" prefWidth="1344.0">
+         <children>
+            <Pane fx:id="phasePane14" layoutY="43.0" prefHeight="59.0" prefWidth="162.0">
+               <children>
+                  <Label fx:id="staticDangerLabel2" layoutY="2.0" text="LEVEL:">
+                     <font>
+                        <Font name="Ditty" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="laneTwoDangerLevelLabel" layoutX="89.0" layoutY="-2.0" prefHeight="64.0" prefWidth="72.0" text="0">
+                     <font>
+                        <Font name="Linotext" size="48.0" />
+                     </font>
+                  </Label>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </Pane>
+            <Rectangle fx:id="laneTwoWall" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="165.0" layoutX="212.0" layoutY="4.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <GridPane fx:id="laneTwoGrid" layoutX="296.0" layoutY="4.0" prefHeight="165.0" prefWidth="1044.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="801.0" minWidth="10.0" prefWidth="523.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="801.0" minWidth="10.0" prefWidth="523.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="0.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <ProgressBar fx:id="lane2Bar" layoutY="25.0" prefWidth="200.0" progress="1.0" />
+            <Pane fx:id="sCanonLane2" layoutX="203.0" layoutY="29.0" prefHeight="56.0" prefWidth="79.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="-1.0" layoutY="-2.0" prefHeight="25.0" prefWidth="79.0" text="0" />
+                  <ImageView fitHeight="41.0" fitWidth="79.0" layoutX="19.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" rotate="5.7">
+                     <image>
+                        <Image url="@Better%20sniper%20rifle.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="vCanonLane2" layoutX="203.0" layoutY="98.0" prefHeight="56.0" prefWidth="79.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="-1.0" layoutY="-2.0" prefHeight="25.0" prefWidth="79.0" text="0" />
+                  <ImageView fitHeight="41.0" fitWidth="79.0" layoutX="11.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" rotate="-15.9">
+                     <image>
+                        <Image url="@cannon.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="pCanonLane2" layoutX="112.0" layoutY="43.0" prefHeight="88.0" prefWidth="101.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="18.0" layoutY="6.0" prefHeight="12.0" prefWidth="65.0" text="0" />
+                  <ImageView fx:id="weaponOneImage11" fitHeight="84.0" fitWidth="80.0" layoutX="11.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@pngtree-cannon-icon-in-flat-circle-isolated-on-white-background-vector-illustration-png-image_4981592.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="trapLane2" layoutX="112.0" layoutY="107.0" prefHeight="55.0" prefWidth="80.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="-1.0" layoutY="-2.0" prefHeight="25.0" prefWidth="79.0" text="0" />
+                  <ImageView fitHeight="41.0" fitWidth="60.0" layoutX="22.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" rotate="5.7">
+                     <image>
+                        <Image url="@log-transparent-1154698042188fzl0gy91.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane fx:id="lane1" layoutX="38.0" layoutY="113.0" prefHeight="176.0" prefWidth="1344.0">
+         <children>
+            <Pane fx:id="phasePane1" layoutY="44.0" prefHeight="59.0" prefWidth="162.0">
+               <children>
+                  <Label fx:id="staticDangerLabel1" layoutX="1.0" layoutY="2.0" text="LEVEL:" wrapText="true">
+                     <font>
+                        <Font name="Ditty" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="laneOneDangerLevelLabel" layoutX="89.0" layoutY="-2.0" prefHeight="64.0" prefWidth="72.0" text="0">
+                     <font>
+                        <Font name="Linotext" size="48.0" />
+                     </font>
+                  </Label>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </Pane>
+            <Rectangle fx:id="laneOneWall" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="165.0" layoutX="212.0" layoutY="4.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <GridPane fx:id="laneOneGrid" layoutX="296.0" layoutY="4.0" prefHeight="165.0" prefWidth="1044.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="801.0" minWidth="10.0" prefWidth="523.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="801.0" minWidth="10.0" prefWidth="523.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="0.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="946.0" minWidth="10.0" prefWidth="521.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <ProgressBar fx:id="lane1Bar" layoutY="26.0" prefWidth="200.0" progress="1.0" />
+            <Pane fx:id="sCanonLane1" layoutX="203.0" layoutY="26.0" prefHeight="56.0" prefWidth="79.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="-1.0" layoutY="-2.0" prefHeight="25.0" prefWidth="79.0" text="0" />
+                  <ImageView fitHeight="41.0" fitWidth="79.0" layoutX="19.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" rotate="5.7">
+                     <image>
+                        <Image url="@Better%20sniper%20rifle.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="vCanonLane1" layoutX="203.0" layoutY="97.0" prefHeight="56.0" prefWidth="79.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="-1.0" layoutY="-2.0" prefHeight="25.0" prefWidth="79.0" text="0" />
+                  <ImageView fitHeight="41.0" fitWidth="79.0" layoutX="11.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" rotate="-15.9">
+                     <image>
+                        <Image url="@cannon.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="pCanonLane1" layoutX="112.0" layoutY="43.0" prefHeight="88.0" prefWidth="101.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="18.0" layoutY="6.0" prefHeight="12.0" prefWidth="65.0" text="0" />
+                  <ImageView fx:id="weaponOneImage1" fitHeight="84.0" fitWidth="80.0" layoutX="11.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@pngtree-cannon-icon-in-flat-circle-isolated-on-white-background-vector-illustration-png-image_4981592.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="trapLane1" layoutX="112.0" layoutY="135.0" prefHeight="55.0" prefWidth="80.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="-5.0" prefHeight="32.0" prefWidth="79.0" text="0" />
+                  <ImageView fitHeight="41.0" fitWidth="60.0" layoutX="20.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" rotate="5.7">
+                     <image>
+                        <Image url="@log-transparent-1154698042188fzl0gy91.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <AnchorPane fx:id="gameOverPane" layoutY="-4.0" maxHeight="1080.0" maxWidth="1920.0" minHeight="1080.0" minWidth="1920.0" prefHeight="1080.0" prefWidth="1920.0" visible="false">
+         <children>
+            <ImageView fitHeight="1080.0" fitWidth="1930.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@collosal-back.jpg" />
+               </image>
+            </ImageView>
+            <Button fx:id="backToMenuButton" layoutX="782.0" layoutY="625.0" mnemonicParsing="false" onMouseClicked="#goToMenu" style="-fx-background-color: orange; -fx-background-radius: 10; -fx-text-fill: black;" text="Back To Menu">
+               <font>
+                  <Font size="47.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label layoutX="746.0" layoutY="166.0" text="GAME OVER!" textFill="WHITE">
+               <font>
+                  <Font name="Ditty" size="96.0" />
+               </font>
+            </Label>
+            <Label fx:id="finalScore" layoutX="878.0" layoutY="425.0" text="Score:  " textFill="WHITE">
+               <font>
+                  <Font size="38.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Pane fx:id="weaponShop" layoutX="1517.0" layoutY="9.0" prefHeight="1020.0" prefWidth="414.0">
+         <children>
+            <Pane fx:id="weaponOne" layoutY="179.0" prefHeight="359.0" prefWidth="193.0" style="-fx-border-color: black; -fx-border-width: 5;">
+               <children>
+                  <ImageView fx:id="weaponOneImage" fitHeight="130.0" fitWidth="168.0" layoutX="29.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@pngtree-cannon-icon-in-flat-circle-isolated-on-white-background-vector-illustration-png-image_4981592.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="weaponOneName" layoutX="-55.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anti-Titan Shell" textAlignment="CENTER" wrappingWidth="298.9600067138672">
+                     <font>
+                        <Font name="Ditty" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="weaponOneType" layoutX="27.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Piercing Cannon" textAlignment="CENTER" wrappingWidth="139.9600067138672">
+                     <font>
+                        <Font name="Ditty" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="weaponOneDmg" layoutX="24.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" 10 DPS" textAlignment="CENTER" wrappingWidth="139.9600067138672">
+                     <font>
+                        <Font name="Linotext" size="28.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="weaponOnePrice" layoutX="27.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price: 25" textAlignment="CENTER" wrappingWidth="139.9600067138672">
+                     <font>
+                        <Font name="Linotext" size="24.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="weaponOnePurchaseLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="277.0" onMouseClicked="#handlePurchaseClick" prefHeight="56.0" prefWidth="136.0" text="PURCHASE">
+                     <font>
+                        <Font name="Ditty" size="36.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="0.009478672985781991" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.8289473652839661" green="0.33004385232925415" blue="0.33004385232925415" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <effect>
+                        <SepiaTone level="0.0" />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="weaponFour" layoutX="193.0" layoutY="179.0" prefHeight="359.0" prefWidth="193.0" style="-fx-border-color: black; -fx-border-width: 5;">
+               <children>
+                  <ImageView fx:id="weaponFourImage" fitHeight="130.0" fitWidth="168.0" layoutX="33.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@log-transparent-1154698042188fzl0gy91.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="weaponFourName" layoutX="27.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Proximity Trap" textAlignment="RIGHT" wrappingWidth="139.9600067138672">
+                     <font>
+                        <Font name="Ditty" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="weaponFourType" layoutX="27.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arial" textAlignment="CENTER" wrappingWidth="139.9600067138672">
+                     <font>
+                        <Font name="Ditty" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="weaponFourDmg" layoutX="27.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100 DPS" textAlignment="CENTER" wrappingWidth="139.9600067138672">
+                     <font>
+                        <Font name="Linotext" size="28.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="weaponFourPrice" layoutX="27.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price: 75" textAlignment="CENTER" wrappingWidth="139.9600067138672">
+                     <font>
+                        <Font name="Linotext" size="24.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="weaponOnePurchaseLabel3" alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="282.0" onMouseClicked="#handlePurchaseClick" prefHeight="56.0" prefWidth="136.0" text="PURCHASE">
+                     <font>
+                        <Font name="Ditty" size="36.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="0.009478672985781991" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.8289473652839661" green="0.33004385232925415" blue="0.33004385232925415" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <effect>
+                        <SepiaTone level="0.0" />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="weaponThree" layoutY="538.0" prefHeight="359.0" prefWidth="193.0" style="-fx-border-color: black; -fx-border-width: 5;">
+               <children>
+                  <ImageView fx:id="weaponThreeImage" fitHeight="88.0" fitWidth="123.0" layoutX="36.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@cannon.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="weaponThreeName" layoutX="7.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wall Spread Cannon" textAlignment="RIGHT" wrappingWidth="179.99999999999994">
+                     <font>
+                        <Font name="Ditty" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="weaponThreeType" layoutX="27.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arial" textAlignment="CENTER" wrappingWidth="139.9600067138672">
+                     <font>
+                        <Font name="Ditty" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="weaponThreeDmg" layoutX="27.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5 DPS" textAlignment="CENTER" wrappingWidth="139.9600067138672">
+                     <font>
+                        <Font name="Linotext" size="28.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="27.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price: 100" textAlignment="CENTER" wrappingWidth="139.9600067138672">
+                     <font>
+                        <Font name="Linotext" size="24.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="weaponThreePurchaseLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="288.0" onMouseClicked="#handlePurchaseClick" prefHeight="56.0" prefWidth="136.0" text="PURCHASE">
+                     <font>
+                        <Font name="Ditty" size="36.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="0.009478672985781991" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.8289473652839661" green="0.33004385232925415" blue="0.33004385232925415" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <effect>
+                        <SepiaTone level="0.0" />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="weaponTwo" layoutX="193.0" layoutY="538.0" prefHeight="359.0" prefWidth="193.0" style="-fx-border-width: 5; -fx-border-color: black;">
+               <children>
+                  <ImageView fx:id="weaponTwoImage" fitHeight="130.0" fitWidth="168.0" layoutX="32.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Better%20sniper%20rifle.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="weaponTwoName" layoutX="4.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Long Range Spear" textAlignment="CENTER" wrappingWidth="186.0">
+                     <font>
+                        <Font name="Ditty" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="weaponTwoType" layoutX="4.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sniper Cannon" textAlignment="CENTER" wrappingWidth="186.0">
+                     <font>
+                        <Font name="Ditty" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="weaponTwoDmg" layoutX="27.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" 35 DPS" textAlignment="CENTER" wrappingWidth="139.9600067138672">
+                     <font>
+                        <Font name="Linotext" size="28.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="weaponTwoPrice" layoutX="27.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price: 25" textAlignment="CENTER" wrappingWidth="139.9600067138672">
+                     <font>
+                        <Font name="Linotext" size="24.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="weaponTwoPurchaseLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="289.0" onMouseClicked="#handlePurchaseClick" prefHeight="56.0" prefWidth="136.0" text="PURCHASE">
+                     <font>
+                        <Font name="Ditty" size="36.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="0.009478672985781991" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.8289473652839661" green="0.33004385232925415" blue="0.33004385232925415" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <effect>
+                        <SepiaTone level="0.0" />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+               </children>
+            </Pane>
+            <ChoiceBox fx:id="laneToBuyWeapon" layoutX="236.0" layoutY="138.0" prefWidth="150.0" />
+            <Label layoutY="140.0" text="Choose lane to deploy weapon" textFill="#1a1db8">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Button layoutX="88.0" layoutY="905.0" mnemonicParsing="false" onAction="#passTurn" prefHeight="25.0" prefWidth="218.0" text="pass turn">
+               <font>
+                  <Font size="31.0" />
+               </font>
+            </Button>
+            <Pane fx:id="rescourcesPane" layoutY="70.0" prefHeight="59.0" prefWidth="228.0">
+               <children>
+                  <Label fx:id="staticResourcesLabel" layoutY="9.0" text="Resources:">
+                     <font>
+                        <Font name="Ditty" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="resourcesLabel" layoutX="114.0" layoutY="-2.0" prefHeight="64.0" prefWidth="80.0" text="0" textFill="BLUE">
+                     <font>
+                        <Font size="33.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Label alignment="CENTER" layoutX="83.0" layoutY="14.0" prefHeight="70.0" prefWidth="248.0" text="Weapon Shop" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
