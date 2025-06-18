@@ -913,16 +913,26 @@ public class NewHardSceneController {
 		Timeline timeline2 = new Timeline(keyFrame2);
 		timeline2.setCycleCount(1); // Play the animation once
 		timeline2.setOnFinished(actionEvent -> {
-			if(Integer.parseInt(resourcesLabel.getText()) < 150) {
-				resourcesLabel.setTextFill(Color.RED);
-			}
-			else {
-				resourcesLabel.setTextFill(Color.BLUE);
-			}
+			updateRescourcesColor();
 		});
 
 		timeline2.play();
 	}
+
+	public void updateRescourcesColor(){
+		int[] weaponPrices = {25, 25, 100, 75};
+		int price = weaponPrices[selectedWeapon - 1];
+		if(Integer.parseInt(resourcesLabel.getText()) < price) {
+			resourcesLabel.setTextFill(Color.RED);
+		}
+		else {
+			resourcesLabel.setTextFill(Color.BLUE);
+		}
+
+
+	}
+
+
 	@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     public void updateWeaponSelected(MouseEvent event) {
 		Pane[] initialweaponsPanesArray = {weaponOne,weaponTwo,weaponThree,weaponFour};
@@ -931,6 +941,7 @@ public class NewHardSceneController {
         Pane weaponSelectedPane = (Pane)event.getSource();
 		int newSelectedWeapon = weaponsPanes.indexOf(weaponSelectedPane);
 		this.selectedWeapon = newSelectedWeapon + 1;
+		updateRescourcesColor();
 		updateSelectedVisibility(initialweaponsImagesArray[newSelectedWeapon]);
 		
 	}
